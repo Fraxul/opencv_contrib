@@ -1338,7 +1338,12 @@ void PathAggregation::operator() (const GpuMat& left, const GpuMat& right, GpuMa
 
     const int num_paths = mode == StereoSGBM::MODE_HH4 ? 4 : 8;
 
-    stream.waitForCompletion();
+    // Ensure work in the main stream is finished before substreams start
+    fanoutStartEvent.record(stream);
+    for (int i = 0 ; i < num_paths; ++i)
+    {
+        streams[i].waitEvent(fanoutStartEvent);
+    }
 
     const Size size = left.size();
     const int buffer_step = size.width * size.height * static_cast<int>(MAX_DISPARITY);
@@ -1362,12 +1367,11 @@ void PathAggregation::operator() (const GpuMat& left, const GpuMat& right, GpuMa
         oblique::aggregateDownleft2UprightPath<MAX_DISPARITY>(left, right, subs[7], p1, p2, min_disp, streams[7]);
     }
 
-    // synchronization
+    // Join the substreams back to the main stream
     for (int i = 0; i < num_paths; ++i)
     {
         events[i].record(streams[i]);
         stream.waitEvent(events[i]);
-        streams[i].waitForCompletion();
     }
 }
 

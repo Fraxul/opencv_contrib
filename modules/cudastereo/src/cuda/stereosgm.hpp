@@ -25,6 +25,7 @@ class PathAggregation
 private:
     static constexpr unsigned int MAX_NUM_PATHS = 8;
 
+    Event fanoutStartEvent;
     std::array<Stream, MAX_NUM_PATHS> streams;
     std::array<Event, MAX_NUM_PATHS> events;
     std::array<GpuMat, MAX_NUM_PATHS> subs;
