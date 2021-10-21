@@ -336,7 +336,7 @@ void drawDetectedCornersCharuco(InputOutputArray _image, InputArray _charucoCorn
                                 InputArray _charucoIds, Scalar cornerColor) {
 
     CV_Assert(_image.getMat().total() != 0 &&
-              (_image.getMat().channels() == 1 || _image.getMat().channels() == 3));
+              (_image.getMat().channels() == 1 || _image.getMat().channels() == 3 || _image.getMat().channels() == 4));
     CV_Assert((_charucoCorners.getMat().total() == _charucoIds.getMat().total()) ||
               _charucoIds.getMat().total() == 0);
 
@@ -507,7 +507,7 @@ void drawCharucoDiamond(const Ptr<Dictionary> &dictionary, Vec4i ids, int square
 void drawDetectedDiamonds(InputOutputArray _image, InputArrayOfArrays _corners,
                           InputArray _ids, Scalar borderColor) {
     CV_Assert(_image.getMat().total() != 0 &&
-              (_image.getMat().channels() == 1 || _image.getMat().channels() == 3));
+              (_image.getMat().channels() == 1 || _image.getMat().channels() == 3 || _image.getMat().channels() == 4));
     CV_Assert((_corners.total() == _ids.total()) || _ids.total() == 0);
 
     // calculate colors

@@ -1215,7 +1215,7 @@ void ArucoDetector::refineDetectedMarkers(InputArray _image, const Ptr<Board> &_
 void drawDetectedMarkers(InputOutputArray _image, InputArrayOfArrays _corners,
                          InputArray _ids, Scalar borderColor) {
     CV_Assert(_image.getMat().total() != 0 &&
-              (_image.getMat().channels() == 1 || _image.getMat().channels() == 3));
+              (_image.getMat().channels() == 1 || _image.getMat().channels() == 3 || _image.getMat().channels() == 4));
     CV_Assert((_corners.total() == _ids.total()) || _ids.total() == 0);
 
     // calculate colors
