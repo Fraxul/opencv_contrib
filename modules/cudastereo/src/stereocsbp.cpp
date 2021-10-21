@@ -222,18 +222,8 @@ namespace
         ////////////////////////////////////////////////////////////////////////////
         // Compute
 
-        l[0].setTo(0, _stream);
-        d[0].setTo(0, _stream);
-        r[0].setTo(0, _stream);
-        u[0].setTo(0, _stream);
-
-        l[1].setTo(0, _stream);
-        d[1].setTo(0, _stream);
-        r[1].setTo(0, _stream);
-        u[1].setTo(0, _stream);
-
-        data_cost.setTo(0, _stream);
-        data_cost_selected.setTo(0, _stream);
+        mbuf_.setTo(0, _stream);
+        temp_.setTo(0, _stream);
 
         int cur_idx = 0;
 
